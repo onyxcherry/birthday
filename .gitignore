@@ -1,0 +1,17 @@
+*.py[cod]
+__pycache__
+venv
+*.log*
+.vscode
+app.db
+*:Zone.Identifier
+.env
+virtualenv
+.tox
+*.egg-info
+.coverage
+htmlcov
+*.mo
+.idea
+logs/
+.secrets

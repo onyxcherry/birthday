@@ -1,0 +1,24 @@
+img {
+    width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
+.pretty-gifs {
+    display: flex;
+}
+
+.img1 {
+    flex: 1.0;
+}
+
+.img2 {
+    flex: 0.7246;
+}
+
+.img3 {
+    flex: 1.33;
+}
+.pic {
+    margin: 0.5em;
+}

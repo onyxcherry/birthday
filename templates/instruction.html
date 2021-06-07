@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>🐱‍👤</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+</head>
+
+<body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">
+        I'm 🐱‍👤
+      </h1>
+      <p class="subtitle">
+        Go <a href="https://game.onyxcherry.pl">here</a> and face the challenge.
+      </p>
+      <h2 class="subtitle">Hints:</h2>
+      <div id="hints-errors" class="block">
+      </div>
+      <div class="columns hints">
+      
+        <div class="column is-half">
+          <div class="block">
+            <button id="first-btn" class="button is-primary is-large">First</button>
+          </div>
+          <div id="first-hint" class="block">
+          </div>
+        </div>
+      
+        <div class="column is-half">
+          <div class="block">
+            <button id="second-btn" class="button is-primary is-large">Second</button>
+          </div>
+          <div class="block">
+            <figure id="second-hint" class="image">
+            </figure>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <script src="/static/js/getHints.js" async defer></script>
+</body>
+
+</html>

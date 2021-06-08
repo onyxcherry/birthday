@@ -1,4 +1,11 @@
-from flask import Flask, request, make_response, render_template, jsonify
+from flask import (
+    Flask,
+    request,
+    make_response,
+    render_template,
+    jsonify,
+    Response,
+)
 from distutils.util import strtobool
 import os.path
 import datetime
@@ -17,16 +24,27 @@ hints = {
         """1500.jpg?width=700&quality=85&auto=format&fit=max"""
         """&s=821bba7a63d9407fc729545846752346">"""
     ),
-    "2": """<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/E-j-vlDuYtA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>""",
+    "2": (
+        """<iframe width="560" height="315" src="https://"""
+        """www.youtube-nocookie.com/embed/E-j-vlDuYtA" title="YouTube"""
+        """ video player" frameborder="0" allow="accelerometer; autoplay; """
+        """clipboard-write; encrypted-media; gyroscope; picture-in-picture" """
+        """ allowfullscreen></iframe>"""
+    ),
 }
 
 
 @app.route("/")
 def main():
     got_cookie = request.cookies.get(cat_love_cookie_name, "false")
-    loves_cat = strtobool(got_cookie)
-    if loves_cat:
+    if got_cookie.lower() == "true":
         response = make_response(render_template("reallylovescats.html"), 200)
+    elif got_cookie == "undefined":
+        # https://github.com/PwnFunction/Blank-Rick-Roll/blob/main/main.py
+        response = Response()
+        response.headers["link"] = "</static/css/style.css>; rel=stylesheet;"
+        response.headers["Refresh"] = "5; url=https://www.hackthebox.eu/"
+        response.headers["X-Koniec"] = "Zerknij w zrodlo strony - CTRL + U"
     else:
         response = make_response(render_template("423.html"), 423)
         response.set_cookie(cat_love_cookie_name, "false")
@@ -53,7 +71,13 @@ def hints_handle(number):
             content = hints.get(str(number))
             return jsonify({"status": "OK", "content": content})
         else:
-            resp = {"status": "BAD", "reason": "Too fast!"}
+            resp = {
+                "status": "BAD",
+                "reason": (
+                    f"Too fast! - You requested a hint at {timestamp.ctime()}"
+                    f" - wait at least a day."
+                ),
+            }
             return jsonify(resp)
     else:
         with open(hints_filename, "w") as f:

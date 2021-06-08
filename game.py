@@ -65,9 +65,8 @@ def hints_handle(number):
             timestamp = dateutil.parser.parse(timestamp_str)
         now = datetime.datetime.now(datetime.timezone.utc)
         difference = now - timestamp
-        total_diff_seconds = difference.seconds
 
-        if total_diff_seconds >= 60 * 60 * 24 * int(number):
+        if difference.days >= int(number) - 1:
             content = hints.get(str(number))
             return jsonify({"status": "OK", "content": content})
         else:
